@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">HaciBul</string>
+    <string name="giris_yap">Giriş Yap</string>
+    <string name="ad">Ad</string>
+    <string name="soyad">Soyad</string>
+    <string name="Sifre">Şifre</string>
+    <string name="üyedegilmisin">Üye Değil Misin?</string>
+    <string name="kayit_ol">\tKayıt Ol.</string>
+    <string name="kullanici_kayit">Kullanıcı Kayıt</string>
+    <string name="rehber_kayit">Rehber Kayıt</string>
+    <string name="telefon_numarasi">Telefon No.</string>
+    <string name="kayit_ol_kayit">Kayıt Ol</string>
+    <string name="sifre_tekrar">Şifre Tekrar</string>
+    <string name="tc_kimlik_no">T.C. Kimlik No.</string>
+    <string name="e_posta_adresi">E-Posta Adresi</string>
+    <string name="dogrulama_linki">Doğrulama linki</string>
+    <string name="ileri">İleri</string>
+    <string name="kod_gönder">Kod Gönder</string>
+    <string name="telefon">Telefon</string>
+    <string name="telefon_numaranizi_giriniz">Telefon Numaranızı Giriniz</string>
+    <string name="telefonunuza_sms_olarak_gönderilen_kodu_giriniz">Telefonunuza SMS olarak gönderilen kodu giriniz</string>
+    <string name="kod">Kod</string>
+    <string name="kodu_30_sn_içinde_yeniden_gönderin">Kodu 30 sn içinde yeniden gönderin.</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+
+    <string name="telefon_numaras_ile_giri_yap">Telefon Numarası ile Giriş Yap</string>
+</resources>

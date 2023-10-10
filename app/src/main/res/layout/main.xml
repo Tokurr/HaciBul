@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/arkayeşil"
+    android:gravity="center"
+    android:orientation="vertical"
+
+    android:padding="50dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/giris_yap"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:orientation="horizontal">
+
+        <com.hbb20.CountryCodePicker
+            app:ccp_defaultNameCode="TR"
+            android:id="@+id/giris_countrycode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:ccp_defaultLanguage="TURKISH"
+            app:ccp_showFlag="false"
+            app:ccp_showNameCode="false"
+            tools:ignore="MissingClass" />
+
+        <EditText
+            android:id="@+id/girisTelNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_background"
+            android:elevation="5dp"
+            android:hint="@string/telefon"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColorHint="#757575"
+            tools:ignore="VisualLintTextFieldSize" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/girisSifre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:autofillHints="password"
+            android:background="@drawable/edit_text_background"
+            android:elevation="5dp"
+            android:hint="@string/Sifre"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:textColorHint="#757575"
+            tools:ignore="VisualLintTextFieldSize" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/butonGiris"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yeşil"
+        android:text="@string/giris_yap"
+        tools:ignore="DuplicateSpeakableTextCheck,VisualLintButtonSize" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="130dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/üyedegilmisin" />
+
+        <TextView
+            android:id="@+id/butonKayitOl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/kayit_ol"
+            android:textColor="@color/yeşil"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+
+</LinearLayout>

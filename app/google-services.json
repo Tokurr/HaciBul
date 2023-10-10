@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "392227966648",
+    "project_id": "hac-proje",
+    "storage_bucket": "hac-proje.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392227966648:android:057a0bed09c95e858c2e4d",
+        "android_client_info": {
+          "package_name": "com.ft.hacibul"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2H-DHrspHPdwtqFSRDVpE1CFIXAjWwFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
