@@ -32,7 +32,7 @@ public class RehberKullaniciListesi extends AppCompatActivity {
     private DatabaseReference reference;
     private ArrayList<String> list = new ArrayList<>();
 
-
+    private ArrayList<String> kullaniciAdList = new ArrayList<>();
     String userId;
 
     @Override
@@ -45,9 +45,16 @@ public class RehberKullaniciListesi extends AppCompatActivity {
 
         list = getIntent().getStringArrayListExtra("list");
         userId = getIntent().getStringExtra("userId");
+        kullaniciAdList = getIntent().getStringArrayListExtra("kullaniciAdList");
 
+        ArrayList<String> bilgi = new ArrayList<>();
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,list);
+        for (int i = 0; i < list.size(); i++) {
+
+            bilgi.add(kullaniciAdList.get(i) + "\nid: " + list.get(i));
+        }
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,bilgi);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,11 +78,10 @@ public class RehberKullaniciListesi extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String[] parcalar = selectedItem.split("\n");
 
 
-                rehberUyeEkle(parcalar[1]);
-                kullaniciRehberEkle(parcalar[1]);
+                rehberUyeEkle(selectedItem.toString());
+                kullaniciRehberEkle(selectedItem.toString());
                 dialog.dismiss();
 
 
@@ -98,10 +104,8 @@ public class RehberKullaniciListesi extends AppCompatActivity {
 
         HashMap mData;
         mData = new HashMap<>();
-        mData.put("ad","");
-        mData.put("soyad","");
-        mData.put("sifre","");
-        mData.put("telNo","");
+        mData.put("id",id);
+
         mReference.child("rehberler").child(userId).child("üyeler").child(id)
                 .setValue(mData)
                 .addOnCompleteListener(RehberKullaniciListesi.this, new OnCompleteListener<Void>() {
@@ -129,10 +133,8 @@ public class RehberKullaniciListesi extends AppCompatActivity {
 
         HashMap mData;
         mData = new HashMap<>();
-        mData.put("ad","");
-        mData.put("soyad","");
-        mData.put("sifre","");
-        mData.put("telNo","");
+        mData.put("rehber id",userId);
+
         mReference.child("kullanıcılar").child(id).child("rehber").child(userId)
                 .setValue(mData)
                 .addOnCompleteListener(RehberKullaniciListesi.this, new OnCompleteListener<Void>() {

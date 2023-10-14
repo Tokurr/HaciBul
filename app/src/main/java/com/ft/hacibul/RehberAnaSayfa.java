@@ -48,7 +48,8 @@ public class RehberAnaSayfa extends AppCompatActivity {
     private DatabaseReference reference;
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<String> üyeList = new ArrayList<>();
-
+    private ArrayList<String> kullaniciAdList = new ArrayList<>();
+    private ArrayList<String> üyeAdList = new ArrayList<>();
     private String userId;
 
     private  Button üyeListe;
@@ -57,9 +58,6 @@ public class RehberAnaSayfa extends AppCompatActivity {
     private Button konum;
     String source;
     private HashMap<String,Object> mData;
-
-
-
 
 
     @SuppressLint("MissingInflatedId")
@@ -78,16 +76,31 @@ public class RehberAnaSayfa extends AppCompatActivity {
 
 
 
-        üyeListesi();
-        kullaniciListesi();
+
         liste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RehberAnaSayfa.this,RehberKullaniciListesi.class);
-                intent.putExtra("list",list);
-                intent.putExtra("üyeList",üyeList);
-                intent.putExtra("userId",userId);
-                startActivity(intent);
+
+                kullaniciListesi();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000); // 1000 milisaniye (1 saniye) bekleyin
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Intent intent = new Intent(RehberAnaSayfa.this,RehberKullaniciListesi.class);
+                        intent.putExtra("kullaniciAdList",kullaniciAdList);
+                        intent.putExtra("list",list);
+                        intent.putExtra("üyeList",üyeList);
+                        intent.putExtra("userId",userId);
+                        startActivity(intent);
+
+                    }
+                }).start();
+
+
 
             }
         });
@@ -95,15 +108,29 @@ public class RehberAnaSayfa extends AppCompatActivity {
         üyeListe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 üyeListesi();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1000); // 1000 milisaniye (1 saniye) bekleyin
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent intent = new Intent(RehberAnaSayfa.this,RehberUyeListesi.class);
+                        intent.putExtra("üyeList",üyeList);
+                        intent.putExtra("userId",userId);
+                        intent.putExtra("üyeAdList",üyeAdList);
+
+                        startActivity(intent);
+
+                    }
+                }).start();
 
 
 
-                Intent intent = new Intent(RehberAnaSayfa.this,RehberUyeListesi.class);
-                intent.putExtra("üyeList",üyeList);
-                intent.putExtra("userId",userId);
-
-                startActivity(intent);
             }
         });
 
@@ -158,14 +185,14 @@ public class RehberAnaSayfa extends AppCompatActivity {
             //startForegroundService(new Intent(this, MyLocationService.class));
 
 
-            System.out.println(userId + "     1. yer");
+         //   System.out.println(userId + "     1. yer");
             Intent serviceIntent = new Intent(RehberAnaSayfa.this, MyLocationService.class);
             serviceIntent.putExtra("userId", userId); // userId'yi ekleyin
             serviceIntent.putExtra("bilgi","rehber");
             startForegroundService(serviceIntent);
         } else {
             // Android 7 ve altı sürümler için başlatma işlemi
-            System.out.println(userId + "     2. yer");
+        //    System.out.println(userId + "     2. yer");
             Intent serviceIntent = new Intent(RehberAnaSayfa.this, MyLocationService.class);
             serviceIntent.putExtra("userId", userId); // userId'yi ekleyin
             serviceIntent.putExtra("bilgi","rehber");
@@ -192,10 +219,9 @@ public class RehberAnaSayfa extends AppCompatActivity {
                     String soyad = userSnapshot.child("soyad").getValue(String.class); // "soyad" adlı özelliği al
 
 
-
                     for (int i = 0; i < list.size(); i++) {
 
-                        if(list.get(i).equals(ad + " " + soyad + "\n" + userId))
+                        if(list.get(i).equals(userId))
                         {
                             bayrak = 1;
                             break;
@@ -205,14 +231,11 @@ public class RehberAnaSayfa extends AppCompatActivity {
 
                     if(bayrak == 0)
                     {
-                        list.add( ad +" " + soyad + "\n" + userId);
+                        list.add(userId);
+                        kullaniciAdList.add("ad: " + ad + "\nsoyad: " + soyad);
                     }
-
-
                 }
             }
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -220,14 +243,13 @@ public class RehberAnaSayfa extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     private void üyeListesi()
     {
 
+
+        üyeList.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("rehberler");
 
@@ -241,13 +263,15 @@ public class RehberAnaSayfa extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                         String userId1 = userSnapshot.getKey();
-
-
+                       // String ad = userSnapshot.child("ad").getValue(String.class); // "ad" adlı özelliği al
+                       // String soyad = userSnapshot.child("soyad").getValue(String.class); // "soyad" adlı özelliği al
                         int bayrak = 0;
                         for (int i = 0; i < üyeList.size(); i++) {
 
+
                             if(üyeList.get(i).equals(userId1))
                             {
+
                                 bayrak = 1;
                                 break;
                             }
@@ -277,6 +301,10 @@ public class RehberAnaSayfa extends AppCompatActivity {
         });
 
     }
+
+
+
+
 
 
 }

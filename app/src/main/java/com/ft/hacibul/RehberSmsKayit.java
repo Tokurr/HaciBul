@@ -42,7 +42,6 @@ public class RehberSmsKayit extends AppCompatActivity {
         sifre = findViewById(R.id.editTextSifre);
         kayitOl = findViewById(R.id.kullaniciSmsKayitOl);
 
-
         kayitOl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

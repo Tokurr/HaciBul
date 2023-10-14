@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 if (eslesme > 2) {
-                    Toast.makeText(getApplicationContext(), "Eşleşen kullanıcı/rehber bulunamadı.", Toast.LENGTH_LONG).show();
+                //    Toast.makeText(getApplicationContext(), "Eşleşen kullanıcı/rehber bulunamadı.", Toast.LENGTH_LONG).show();
 
                 }
             }

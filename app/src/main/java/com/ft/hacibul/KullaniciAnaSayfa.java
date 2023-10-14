@@ -49,14 +49,39 @@ public class KullaniciAnaSayfa extends AppCompatActivity {
 
         rehberBul = findViewById(R.id.rehber_bul);
 
-
         rehberBul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 rehberiniBul();
-                rehberiniBul();
+
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000); // 1000 milisaniye (1 saniye) bekleyin
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // bekleme bittikten sonra burası gerçekleştirilir
+                        System.out.println(kullaniciKonum);
+                        System.out.println(rehberKonum);
+                        if(kullaniciKonum!=null && rehberKonum!=null)
+                        {
+                            haritadaGoster(kullaniciKonum, rehberKonum);
+                        }
+
+                    }
+                }).start();
+
             }
         });
+
+
+
+
 
     }
 
@@ -86,10 +111,11 @@ public class KullaniciAnaSayfa extends AppCompatActivity {
                             if (dataSnapshot.exists()) {
                                 // dataSnapshot içindeki verilere erişin
                                 rehberKonum = dataSnapshot.child("konum").getValue(String.class);
+                                System.out.println(rehberKonum);
 
                                 // Diğer işlemleri burada yapabilirsiniz
                             } else {
-                                // Kullanıcı verileri bulunamadı
+                                System.out.println("kullanıcı verileri bulunamadı");
                             }
                         }
 
@@ -121,6 +147,7 @@ public class KullaniciAnaSayfa extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     // dataSnapshot içindeki verilere erişin
                     kullaniciKonum = dataSnapshot.child("konum").getValue(String.class);
+                    System.out.println(kullaniciKonum);
 
 
                 } else {
@@ -148,13 +175,6 @@ public class KullaniciAnaSayfa extends AppCompatActivity {
         }, 10000);
 */
 
-        System.out.println(kullaniciKonum);
-        System.out.println(rehberKonum);
-        if(kullaniciKonum!=null && rehberKonum!=null)
-        {
-            haritadaGoster(kullaniciKonum,rehberKonum);
-
-        }
 
         /*
         handler = new Handler();
@@ -177,6 +197,7 @@ public class KullaniciAnaSayfa extends AppCompatActivity {
 
     }
 
+    /*
     private void hedefKonumuGuncelle(String rehberUserId)
     {
 
@@ -205,12 +226,20 @@ public class KullaniciAnaSayfa extends AppCompatActivity {
 
     }
 
-
+*/
     private void haritadaGoster(String kullaniciKonum, String rehberKonum)
     {
 
+        /*
         Uri uri = Uri.parse("https://www.google.com/maps/dir/" + kullaniciKonum  + "/" + rehberKonum);
         Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+        intent.setPackage("com.google.android.apps.maps");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        */
+
+        Uri uri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=" + rehberKonum);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.setPackage("com.google.android.apps.maps");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
